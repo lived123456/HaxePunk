@@ -63,8 +63,14 @@
 		<exec executable="haxe" dir="doc">
 			<arg line="doc.hxml" />
 		</exec>
-		<exec executable="haxedoc" dir="doc">
-			<arg line="haxedoc.xml" />
+		<exec executable="haxelib" dir="doc">
+			<arg line="run" />
+			<arg line="dox" />
+			<arg line="-i ." />
+			<arg line="-o docs" />
+			<arg line="--theme-path ." />
+			<arg line="-theme haxepunk" />
+			<arg line='--title "HaxePunk API"' />
 		</exec>
 	</target>
 
