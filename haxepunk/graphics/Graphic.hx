@@ -1,6 +1,6 @@
 package haxepunk.graphics;
 
-import lime.utils.Matrix3D;
+import utils.Matrix3D;
 
 interface Graphic
 {

@@ -1,8 +1,12 @@
 package haxepunk;
 
+#if flash
+import flash.Lib;
+import flash.events.Event;
+import flash.display3D.Context3D;
+#else
 import lime.Lime;
-import lime.utils.Matrix3D;
-import haxepunk.scene.Scene;
+#end
 
 #if cpp
 import cpp.vm.Thread;
@@ -10,9 +14,11 @@ import cpp.vm.Thread;
 import neko.vm.Thread;
 #end
 
+import haxepunk.scene.Scene;
+
 class Engine
 {
-
+	
 	public var scene(get, never):Scene;
 	private inline function get_scene():Scene { return _scenes.first(); }
 
@@ -20,13 +26,35 @@ class Engine
 	{
 		_scenes = new List<Scene>();
 		pushScene(scene == null ? new Scene() : scene);
+		
+	#if flash
+		Lib.current.stage.stage3Ds[0].addEventListener(Event.CONTEXT3D_CREATE, ready);
+		Lib.current.stage.stage3Ds[0].requestContext3D();
+	#end
 	}
 
-	public function ready(lime:Lime):Void
+#if flash
+	private function ready(_):Void
 	{
-		HXP.lime = lime;
+		flash = Lib.current.stage.stage3Ds[0].context3D;
+		HXP.windowWidth = Lib.current.stage.stageWidth;
+		HXP.windowHeight = Lib.current.stage.stageHeight;
+		flash.configureBackBuffer(width, height, 0, true);
+		
+		Lib.current.addEventListener(Event.ENTER_FRAME, render);
+		
 		init();
 	}
+#else
+	public function ready(lime:Lime):Void
+	{
+		this.lime = lime;
+		HXP.windowWidth = this.lime.config.width;
+		HXP.windowHeight = this.lime.config.height;
+		
+		init();
+	}
+#end
 
 	/**
 	 * This function is called when the engine is ready. All initialization code should go here.
@@ -38,9 +66,6 @@ class Engine
 
 	private function render():Void
 	{
-		HXP.windowWidth = HXP.lime.config.width;
-		HXP.windowHeight = HXP.lime.config.height;
-
 		scene.draw();
 	}
 
@@ -93,5 +118,11 @@ class Engine
 	}
 
 	private var _scenes:List<Scene>;
+	
+#if flash
+	private var flash:Context3D;
+#else
+	private var lime:Lime;	
+#end
 
 }

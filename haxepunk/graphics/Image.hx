@@ -4,7 +4,7 @@ import lime.gl.GL;
 import lime.gl.GLBuffer;
 import lime.utils.Float32Array;
 import lime.utils.Vector3D;
-import lime.utils.Matrix3D;
+import utils.Matrix3D;
 
 class Image implements Graphic
 {
