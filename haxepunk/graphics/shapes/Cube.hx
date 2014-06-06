@@ -1,7 +1,7 @@
 package haxepunk.graphics.shapes;
 
 import haxepunk.graphics.Mesh;
-import lime.gl.GLBuffer;
+import haxepunk.internal.Renderer;
 
 class Cube extends Mesh
 {
@@ -63,6 +63,6 @@ class Cube extends Mesh
 		}
 	}
 
-	private static var defaultVertexBuffer:GLBuffer;
-	private static var defaultIndexBuffer:GLBuffer;
+	private static var defaultVertexBuffer:Buffer;
+	private static var defaultIndexBuffer:Buffer;
 }

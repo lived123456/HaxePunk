@@ -1,9 +1,10 @@
 package haxepunk.graphics;
 
+import haxepunk.internal.Renderer;
 import lime.gl.GL;
 import lime.gl.GLUniformLocation;
-import lime.utils.Assets;
-import lime.utils.Matrix3D;
+import haxepunk.utils.Assets;
+import haxepunk.utils.Matrix3D;
 
 class Material
 {
@@ -76,7 +77,7 @@ class Material
 		GL.disableVertexAttribArray(_texCoordAttribute);
 		GL.disableVertexAttribArray(_normalAttribute);
 
-		GL.bindTexture(GL.TEXTURE_2D, null);
+		Renderer.bindTexture(null);
 
 		GL.useProgram(null);
 	}

@@ -1,5 +1,6 @@
 package haxepunk.graphics;
 
+import haxepunk.internal.Renderer;
 import lime.gl.GL;
 import lime.gl.GLShader;
 import lime.gl.GLProgram;

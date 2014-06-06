@@ -3,7 +3,6 @@ package haxepunk;
 #if flash
 import flash.Lib;
 import flash.events.Event;
-import flash.display3D.Context3D;
 #else
 import lime.Lime;
 #end
@@ -14,6 +13,7 @@ import cpp.vm.Thread;
 import neko.vm.Thread;
 #end
 
+import haxepunk.internal.Renderer;
 import haxepunk.scene.Scene;
 
 class Engine
@@ -28,18 +28,16 @@ class Engine
 		pushScene(scene == null ? new Scene() : scene);
 		
 	#if flash
-		Lib.current.stage.stage3Ds[0].addEventListener(Event.CONTEXT3D_CREATE, ready);
-		Lib.current.stage.stage3Ds[0].requestContext3D();
+		Renderer.get3DContext(ready);
 	#end
 	}
 
 #if flash
 	private function ready(_):Void
 	{
-		flash = Lib.current.stage.stage3Ds[0].context3D;
+		Renderer.ctx = Renderer.stage3D.context3D;
 		HXP.windowWidth = Lib.current.stage.stageWidth;
 		HXP.windowHeight = Lib.current.stage.stageHeight;
-		flash.configureBackBuffer(width, height, 0, true);
 		
 		Lib.current.addEventListener(Event.ENTER_FRAME, render);
 		
@@ -48,9 +46,9 @@ class Engine
 #else
 	public function ready(lime:Lime):Void
 	{
-		this.lime = lime;
-		HXP.windowWidth = this.lime.config.width;
-		HXP.windowHeight = this.lime.config.height;
+		Renderer.lime = lime;
+		HXP.windowWidth = lime.config.width;
+		HXP.windowHeight = lime.config.height;
 		
 		init();
 	}
@@ -64,9 +62,11 @@ class Engine
 		throw "Override the init function to begin";
 	}
 
-	private function render():Void
+	private function render(#if flash _ #end):Void
 	{
 		scene.draw();
+		
+		Renderer.present();
 	}
 
 	private function update():Void
@@ -118,11 +118,5 @@ class Engine
 	}
 
 	private var _scenes:List<Scene>;
-	
-#if flash
-	private var flash:Context3D;
-#else
-	private var lime:Lime;	
-#end
 
 }

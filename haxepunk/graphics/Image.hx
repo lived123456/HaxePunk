@@ -1,10 +1,10 @@
 package haxepunk.graphics;
 
+import haxepunk.internal.Renderer;
 import lime.gl.GL;
-import lime.gl.GLBuffer;
 import lime.utils.Float32Array;
-import lime.utils.Vector3D;
-import utils.Matrix3D;
+import haxepunk.utils.Vector3D;
+import haxepunk.utils.Matrix3D;
 
 class Image implements Graphic
 {
@@ -114,6 +114,6 @@ class Image implements Graphic
 	}
 
 	private var _texture:Texture;
-	private static var _vertexBuffer:GLBuffer;
+	private static var _vertexBuffer:Buffer;
 
 }

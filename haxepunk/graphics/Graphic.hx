@@ -1,6 +1,6 @@
 package haxepunk.graphics;
 
-import utils.Matrix3D;
+import haxepunk.utils.Matrix3D;
 
 interface Graphic
 {

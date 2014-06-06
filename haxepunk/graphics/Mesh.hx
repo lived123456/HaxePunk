@@ -1,14 +1,14 @@
 package haxepunk.graphics;
 
+import haxepunk.internal.Renderer;
 import lime.gl.GL;
-import lime.gl.GLBuffer;
 #if lime_html5
 import js.html.Int16Array;
-#else
+#elseif lime_native
 import lime.utils.Int16Array;
 #end
 import lime.utils.Float32Array;
-import lime.utils.Matrix3D;
+import haxepunk.utils.Matrix3D;
 
 class Mesh implements Graphic
 {
@@ -29,8 +29,15 @@ class Mesh implements Graphic
 		this.material = (material == null ? new Material() : material);
 
 		// check that the buffers aren't already loaded from a super class
-		if (_vertexBuffer == null) createBuffer(data);
-		if (_indexBuffer == null) createIndexBuffer(indices);
+		if (_vertexBuffer == null)
+		{
+			createBuffer(data);
+		}
+		
+		if (_indexBuffer == null)
+		{
+			createIndexBuffer(indices);
+		}
 	}
 
 	/**
@@ -53,27 +60,37 @@ class Mesh implements Graphic
 		GL.bindBuffer(GL.ARRAY_BUFFER, null);
 	}
 
-	private function createBuffer(data:Array<Float>):GLBuffer
+	private function createBuffer(data:Array<Float>):Buffer
 	{
-		if (data == null) throw "Vertex data buffer must not be null";
+		if (data == null)
+		{
+			throw "Vertex data buffer must not be null";
+		}
+		
 		_vertexBuffer = GL.createBuffer();
 		GL.bindBuffer(GL.ARRAY_BUFFER, _vertexBuffer);
 		GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(cast data), GL.STATIC_DRAW);
+		
 		return _vertexBuffer;
 	}
 
-	private function createIndexBuffer(indices:Array<Int>):GLBuffer
+	private function createIndexBuffer(indices:Array<Int>):Buffer
 	{
-		if (indices == null) throw "Index buffer must not be null";
+		if (indices == null)
+		{
+			throw "Index buffer must not be null";
+		}
+		
 		_indexSize = indices.length;
 		_indexBuffer = GL.createBuffer();
 		GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, _indexBuffer);
 		GL.bufferData(GL.ELEMENT_ARRAY_BUFFER, new Int16Array(cast indices), GL.STATIC_DRAW);
+		
 		return _indexBuffer;
 	}
 
-	private var _indexBuffer:GLBuffer;
-	private var _vertexBuffer:GLBuffer;
+	private var _indexBuffer:Buffer;
+	private var _vertexBuffer:Buffer;
 	private var _indexSize:Int;
 
 }

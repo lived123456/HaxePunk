@@ -1,13 +1,16 @@
 package haxepunk.graphics;
 
-import haxe.ds.StringMap;
+import haxepunk.internal.Renderer;
+import haxepunk.utils.Assets;
+
+#if flash
+import flash.display.BitmapData;
+#else
 import haxe.io.Bytes;
 import haxe.io.BytesInput;
-import lime.gl.GL;
-import lime.gl.GLTexture;
-import lime.utils.Assets;
 import lime.utils.UInt8Array;
 import lime.utils.ByteArray;
+#end
 
 #if cpp
 import cpp.vm.Thread;
@@ -67,22 +70,25 @@ class Texture
 	 */
 	public inline function bind():Void
 	{
-		GL.bindTexture(GL.TEXTURE_2D, _texture);
+		Renderer.bindTexture(_texture);
 	}
 
-	private function createTexture(width:Int, height:Int, dataArray:UInt8Array)
+#if flash
+	private function createTexture(width:Int, height:Int, data:BitmapData)
+#else
+	private function createTexture(width:Int, height:Int, data:UInt8Array)
+#end
 	{
 		this.width = width;
 		this.height = height;
+		
+		_texture = Renderer.createTexture(width, height, data);		
 
-		_texture = GL.createTexture();
-		GL.bindTexture(GL.TEXTURE_2D, _texture);
-		GL.texImage2D(GL.TEXTURE_2D, 0, GL.RGBA, width, height, 0, GL.RGBA, GL.UNSIGNED_BYTE, dataArray);
-		GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.LINEAR);
-		GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR);
-		GL.bindTexture(GL.TEXTURE_2D, null);
-
-		for (onload in _onload) onload();
+		for (onload in _onload)
+		{
+			onload();
+		}
+		
 		_loaded = true;
 	}
 
@@ -93,7 +99,11 @@ class Texture
 
 	private inline function loadImage(path:String)
 	{
-#if lime_html5
+#if flash
+		var imageData = Assets.getBitmapData(path);
+		createTexture(imageData.width, imageData.height, imageData);
+#else
+	#if lime_html5
 		var image: js.html.ImageElement = js.Browser.document.createImageElement();
 		image.onload = function(a) {
 			var width = toPowerOfTwo(image.width);
@@ -115,7 +125,7 @@ class Texture
 			imageBytes = null;
 		};
 		image.src = path;
-#else
+	#elseif lime_native
 		var t = Thread.create(function() {
 			var current = Thread.readMessage(true);
 
@@ -145,12 +155,13 @@ class Texture
 			});
 		});
 		t.sendMessage(Thread.current());
+	#end
 #end
 	}
 
-	private var _texture:GLTexture;
+	private var _texture:GTexture;
 	private var _onload:Array<OnloadCallback>;
 	private var _loaded:Bool = false;
-	private static var _textures = new StringMap<Texture>();
+	private static var _textures = new Map<String, Texture>();
 
 }

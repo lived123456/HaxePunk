@@ -11,7 +11,7 @@ import flash.text.Font;
 import flash.media.Sound;
 import flash.net.URLRequest;
 import flash.utils.ByteArray;
-import flash.Assets;
+import haxepunk.utils.Assets;
 
 import flash.display.Loader;
 import flash.events.Event;
@@ -256,7 +256,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		::if (type == "image")::
 			@:keep @:bitmap("::sourcePath::") class __ASSET__::flatName:: extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 		::else::
-			@:keep class __ASSET__::flatName:: extends ::flashClass:: { }
+			@:keep class __ASSET__::flatName:: extends flash.utils.ByteArray /*::flashClass::*/ { }
 		::end::
 	::end::
 ::end::

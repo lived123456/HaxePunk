@@ -1,4 +1,4 @@
-package flash;
+package haxepunk.utils;
 
 #if !macro
 
@@ -136,19 +136,19 @@ class Assets {
 					
 				} else {
 					
-					trace ("[openfl.Assets] BitmapData asset \"" + id + "\" exists, but only asynchronously");
+					trace ("[Assets] BitmapData asset \"" + id + "\" exists, but only asynchronously");
 					
 				}
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no BitmapData asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no BitmapData asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -185,19 +185,19 @@ class Assets {
 					
 				} else {
 					
-					trace ("[openfl.Assets] String or ByteArray asset \"" + id + "\" exists, but only asynchronously");
+					trace ("[Assets] String or ByteArray asset \"" + id + "\" exists, but only asynchronously");
 					
 				}
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no String or ByteArray asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no String or ByteArray asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -248,19 +248,19 @@ class Assets {
 					
 				} else {
 					
-					trace ("[openfl.Assets] Font asset \"" + id + "\" exists, but only asynchronously");
+					trace ("[Assets] Font asset \"" + id + "\" exists, but only asynchronously");
 					
 				}
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no Font asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no Font asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -310,19 +310,19 @@ class Assets {
 					
 				} else {
 					
-					trace ("[openfl.Assets] MovieClip asset \"" + id + "\" exists, but only asynchronously");
+					trace ("[Assets] MovieClip asset \"" + id + "\" exists, but only asynchronously");
 					
 				}
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no MovieClip asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no MovieClip asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -379,19 +379,19 @@ class Assets {
 					
 				} else {
 					
-					trace ("[openfl.Assets] Sound asset \"" + id + "\" exists, but only asynchronously");
+					trace ("[Assets] Sound asset \"" + id + "\" exists, but only asynchronously");
 					
 				}
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no Sound asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no Sound asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -426,13 +426,13 @@ class Assets {
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -489,19 +489,19 @@ class Assets {
 					
 				} else {
 					
-					trace ("[openfl.Assets] Sound asset \"" + id + "\" exists, but only asynchronously");
+					trace ("[Assets] Sound asset \"" + id + "\" exists, but only asynchronously");
 					
 				}
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no Sound asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no Sound asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -538,19 +538,19 @@ class Assets {
 					
 				} else {
 					
-					trace ("[openfl.Assets] String asset \"" + id + "\" exists, but only asynchronously");
+					trace ("[Assets] String asset \"" + id + "\" exists, but only asynchronously");
 					
 				}
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no String asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no String asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -635,11 +635,6 @@ class Assets {
 	private static function isValidBitmapData (bitmapData:BitmapData):Bool {
 		
 		#if (tools && !display)
-		#if (cpp || neko)
-		
-		return (bitmapData.__handle != null);
-		
-		#elseif flash
 		
 		try {
 			
@@ -650,12 +645,6 @@ class Assets {
 			return false;
 			
 		}
-		
-		#elseif openfl_html5
-		
-		return (bitmapData.__sourceImage != null || bitmapData.__sourceCanvas != null);
-		
-		#end
 		#end
 		
 		return true;
@@ -664,14 +653,6 @@ class Assets {
 	
 	
 	private static function isValidSound (sound:Sound):Bool {
-		
-		#if (tools && !display)
-		#if (cpp || neko)
-		
-		return (sound.__handle != null && sound.__handle != 0);
-		
-		#end
-		#end
 		
 		return true;
 		
@@ -747,13 +728,13 @@ class Assets {
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no BitmapData asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no BitmapData asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -783,13 +764,13 @@ class Assets {
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no String or ByteArray asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no String or ByteArray asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -840,13 +821,13 @@ class Assets {
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no Font asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no Font asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -877,7 +858,7 @@ class Assets {
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + name + "\"");
+			trace ("[Assets] There is no asset library named \"" + name + "\"");
 			
 		}
 		
@@ -932,13 +913,13 @@ class Assets {
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no Sound asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no Sound asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -968,13 +949,13 @@ class Assets {
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no MovieClip asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no MovieClip asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -1031,13 +1012,13 @@ class Assets {
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no Sound asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no Sound asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -1067,13 +1048,13 @@ class Assets {
 				
 			} else {
 				
-				trace ("[openfl.Assets] There is no String asset with an ID of \"" + id + "\"");
+				trace ("[Assets] There is no String asset with an ID of \"" + id + "\"");
 				
 			}
 			
 		} else {
 			
-			trace ("[openfl.Assets] There is no asset library named \"" + libraryName + "\"");
+			trace ("[Assets] There is no asset library named \"" + libraryName + "\"");
 			
 		}
 		
@@ -1123,15 +1104,11 @@ class Assets {
 		
 		var value = Type.resolveEnum (name);
 		
-		#if flash
-		
 		if (value == null) {
 			
 			return cast Type.resolveClass (name);
 			
 		}
-		
-		#end
 		
 		return value;
 		
@@ -1181,7 +1158,7 @@ class Assets {
 	
 }
 
-@:allow(flash)
+@:allow(haxepunk.utils.Assets)
 class AssetLibrary {
 	
 	
@@ -1516,99 +1493,20 @@ class Assets {
 	
 	macro public static function embedBitmap ():Array<Field> {
 		
-		#if (html5 && !openfl_html5_dom)
-		var fields = embedData (":bitmap", true);
-		#else
 		var fields = embedData (":bitmap");
-		#end
 		
 		if (fields != null) {
 			
 			var constructor = macro { 
-				
-				#if html5
-				#if openfl_html5_dom
-				
-				super (width, height, transparent, fillRGBA);
-				
-				var currentType = Type.getClass (this);
-				
-				if (preload != null) {
-					
-					___textureBuffer.width = Std.int (preload.width);
-					___textureBuffer.height = Std.int (preload.height);
-					rect = new openfl.geom.Rectangle (0, 0, preload.width, preload.height);
-					setPixels(rect, preload.getPixels(rect));
-					__buildLease();
-					
-				} else {
-					
-					var byteArray = openfl.utils.ByteArray.fromBytes (haxe.Resource.getBytes(resourceName));
-					
-					if (onload != null && !Std.is (onload, Bool)) {
-						
-						__loadFromBytes(byteArray, null, onload);
-						
-					} else {
-						
-						__loadFromBytes(byteArray);
-						
-					}
-					
-				}
-				
-				#else
-				
-				super (0, 0, transparent, fillRGBA);
-				
-				if (preload != null) {
-					
-					__sourceImage = preload;
-					width = __sourceImage.width;
-					height = __sourceImage.height;
-					
-				} else {
-					
-					__loadFromBase64 (haxe.Resource.getString(resourceName), resourceType, function (b) {
-						
-						if (preload == null) {
-							
-							preload = b.__sourceImage;
-							
-						}
-						
-						if (onload != null) {
-							
-							onload (b);
-							
-						}
-						
-					});
-					
-				}
-				
-				#end
-				#else
 				
 				super (width, height, transparent, fillRGBA);
 				
 				var byteArray = openfl.utils.ByteArray.fromBytes (haxe.Resource.getBytes (resourceName));
 				__loadFromBytes (byteArray);
 				
-				#end
-				
 			};
 			
 			var args = [ { name: "width", opt: false, type: macro :Int, value: null }, { name: "height", opt: false, type: macro :Int, value: null }, { name: "transparent", opt: true, type: macro :Bool, value: macro true }, { name: "fillRGBA", opt: true, type: macro :Int, value: macro 0xFFFFFFFF } ];
-			
-			#if html5
-			args.push ({ name: "onload", opt: true, type: macro :Dynamic, value: null });
-			#if openfl_html5_dom
-			fields.push ({ kind: FVar(macro :openfl.display.BitmapData, null), name: "preload", doc: null, meta: [], access: [ APublic, AStatic ], pos: Context.currentPos() });
-			#else
-			fields.push ({ kind: FVar(macro :js.html.Image, null), name: "preload", doc: null, meta: [], access: [ APublic, AStatic ], pos: Context.currentPos() });
-			#end
-			#end
 			
 			fields.push ({ name: "new", access: [ APublic ], kind: FFun({ args: args, expr: constructor, params: [], ret: null }), pos: Context.currentPos() });
 			
@@ -1696,11 +1594,7 @@ class Assets {
 				
 				super();
 				
-				#if openfl_html5_dom
-				nmeFromBytes (haxe.Resource.getBytes (resourceName));
-				#else
 				__fromBytes (haxe.Resource.getBytes (resourceName));
-				#end
 				
 			};
 			
@@ -1750,11 +1644,6 @@ class Assets {
 		
 		if (path != null && path != "") {
 			
-			#if html5
-			Sys.command ("haxelib", [ "run", "openfl", "generate", "-font-hash", sys.FileSystem.fullPath(path) ]);
-			path += ".hash";
-			#end
-			
 			var bytes = File.getBytes (path);
 			var resourceName = "NME_font_" + (classType.pack.length > 0 ? classType.pack.join ("_") + "_" : "") + classType.name;
 			
@@ -1788,7 +1677,7 @@ class Assets {
 		
 		if (fields != null) {
 			
-			#if (!html5) // CFFILoader.h(248) : NOT Implemented:api_buffer_data
+			// CFFILoader.h(248) : NOT Implemented:api_buffer_data
 			
 			var constructor = macro { 
 				
@@ -1801,8 +1690,6 @@ class Assets {
 			
 			var args = [ { name: "stream", opt: true, type: macro :openfl.net.URLRequest, value: null }, { name: "context", opt: true, type: macro :openfl.media.SoundLoaderContext, value: null }, { name: "forcePlayAsMusic", opt: true, type: macro :Bool, value: macro false } ];
 			fields.push ({ name: "new", access: [ APublic ], kind: FFun({ args: args, expr: constructor, params: [], ret: null }), pos: Context.currentPos() });
-			
-			#end
 			
 		}
 		

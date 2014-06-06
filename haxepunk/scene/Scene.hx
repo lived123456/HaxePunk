@@ -1,7 +1,7 @@
 package haxepunk.scene;
 
 import haxepunk.graphics.Graphic;
-import lime.utils.Matrix3D;
+import haxepunk.utils.Matrix3D;
 
 class Scene
 {

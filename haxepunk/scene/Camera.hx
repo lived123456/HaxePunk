@@ -1,11 +1,9 @@
 package haxepunk.scene;
 
 import haxepunk.HXP;
-import lime.gl.GL;
-import lime.gl.GLFramebuffer;
-import lime.gl.GLRenderbuffer;
-import lime.utils.Vector3D;
-import lime.utils.Matrix3D;
+import haxepunk.internal.Renderer;
+import haxepunk.utils.Vector3D;
+import haxepunk.utils.Matrix3D;
 
 class Camera
 {
@@ -31,7 +29,7 @@ class Camera
 		// GL.framebufferTexture2D(GL.FRAMEBUFFER, GL.COLOR_ATTACHMENT0, GL.TEXTURE_2D, texture, 0);
 	}
 
-	public function make2D()
+	public inline function make2D()
 	{
 		matrix = Matrix3D.createOrtho(0, HXP.windowWidth, HXP.windowHeight, 0, 500, -500);
 	}
@@ -41,18 +39,15 @@ class Camera
 		make2D();
 		// GL.bindFramebuffer(GL.FRAMEBUFFER, null);
 		// GL.bindRenderbuffer(GL.RENDERBUFFER, null);
-#if !neko
-		GL.viewport(0, 0, HXP.windowWidth, HXP.windowHeight);
-#end
-		GL.enable(GL.DEPTH_TEST);
+		
+		Renderer.viewport(0, 0, HXP.windowWidth, HXP.windowHeight);
+		Renderer.enableDepthTest();
 
 		// TODO: move this to texture?
-		GL.enable(GL.BLEND);
-		GL.blendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA);
+		Renderer.enableBlend(Renderer.SRC_ALPHA, Renderer.ONE_MINUS_SRC_ALPHA);
 
 		// TODO: set option for clear color per camera?
-		GL.clearColor(0.117, 0.117, 0.117, 1.0);
-		GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
+		Renderer.clear(0.117, 0.117, 0.177, 1.0);
 	}
 
 	public function lookAt(target:Vector3D):Void
@@ -60,7 +55,7 @@ class Camera
 
 	}
 
-	private var _framebuffer:GLFramebuffer;
-	private var _renderbuffer:GLRenderbuffer;
+	//private var _framebuffer:GLFramebuffer;
+	//private var _renderbuffer:GLRenderbuffer;
 
 }
