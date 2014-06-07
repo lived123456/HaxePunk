@@ -6,7 +6,14 @@ class Matrix3D extends flash.geom.Matrix3D
 {
 	public function new(?v:Array<Float>) 
 	{
-		super(Vector.ofArray(v));
+		if (v != null)
+		{
+			super(Vector.ofArray(v));
+		}
+		else
+		{
+			super(new Vector());
+		}
 	}
 	
 	public static function create2D(x:Float, y:Float, scale:Float = 1, rotation:Float = 0) 

@@ -63,6 +63,6 @@ class Cube extends Mesh
 		}
 	}
 
-	private static var defaultVertexBuffer:Buffer;
-	private static var defaultIndexBuffer:Buffer;
+	private static var defaultVertexBuffer:ARBuffer;
+	private static var defaultIndexBuffer:ARBuffer;
 }

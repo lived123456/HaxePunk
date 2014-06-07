@@ -159,7 +159,7 @@ class Texture
 #end
 	}
 
-	private var _texture:GTexture;
+	private var _texture:ARTexture;
 	private var _onload:Array<OnloadCallback>;
 	private var _loaded:Bool = false;
 	private static var _textures = new Map<String, Texture>();

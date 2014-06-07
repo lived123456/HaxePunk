@@ -4,14 +4,13 @@ import lime.Lime;
 import lime.gl.GL;
 import lime.utils.UInt8Array;
 
-@:allow(haxepunk.Engine)
 class Renderer
 {
 	
 	public static inline var ONE_MINUS_SRC_ALPHA = GL.ONE_MINUS_SRC_ALPHA;
 	public static inline var SRC_ALPHA = GL.SRC_ALPHA;
 	
-	public static inline function bindTexture(texture:GTexture):Void
+	public static inline function bindTexture(texture:ARTexture):Void
 	{		
 		GL.bindTexture(GL.TEXTURE_2D, texture);
 	}
@@ -22,7 +21,7 @@ class Renderer
 		GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 	}
 	
-	public static inline function createTexture(width:Int, height:Int, data:UInt8Array):GTexture
+	public static inline function createTexture(width:Int, height:Int, data:UInt8Array):ARTexture
 	{
 		var texture = GL.createTexture();
 		
@@ -57,10 +56,11 @@ class Renderer
 		#end
 	}
 	
+	@:allow(haxepunk.Engine)
 	private static var lime:Lime;
 
 }
 
-typedef Buffer = lime.gl.GLBuffer;
+typedef ARBuffer = lime.gl.GLBuffer;
 
-typedef GTexture = lime.gl.GLTexture;
+typedef ARTexture = lime.gl.GLTexture;

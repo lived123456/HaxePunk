@@ -60,7 +60,7 @@ class Mesh implements Graphic
 		GL.bindBuffer(GL.ARRAY_BUFFER, null);
 	}
 
-	private function createBuffer(data:Array<Float>):Buffer
+	private function createBuffer(data:Array<Float>):ARBuffer
 	{
 		if (data == null)
 		{
@@ -74,7 +74,7 @@ class Mesh implements Graphic
 		return _vertexBuffer;
 	}
 
-	private function createIndexBuffer(indices:Array<Int>):Buffer
+	private function createIndexBuffer(indices:Array<Int>):ARBuffer
 	{
 		if (indices == null)
 		{
@@ -89,8 +89,8 @@ class Mesh implements Graphic
 		return _indexBuffer;
 	}
 
-	private var _indexBuffer:Buffer;
-	private var _vertexBuffer:Buffer;
+	private var _indexBuffer:ARBuffer;
+	private var _vertexBuffer:ARBuffer;
 	private var _indexSize:Int;
 
 }

@@ -114,6 +114,6 @@ class Image implements Graphic
 	}
 
 	private var _texture:Texture;
-	private static var _vertexBuffer:Buffer;
+	private static var _vertexBuffer:ARBuffer;
 
 }

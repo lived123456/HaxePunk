@@ -7,14 +7,13 @@ import flash.display3D.Context3D;
 import flash.display3D.Context3DBlendFactor;
 import flash.events.Event;
 
-@:allow(haxepunk.Engine)
 class Renderer
 {
 	
-	public static var ONE_MINUS_SRC_ALPHA = Context3DBlendFactor.ONE_MINUS_SOURCE_ALPHA;
-	public static var SRC_ALPHA = Context3DBlendFactor.SOURCE_ALPHA;
+	public static var ONE_MINUS_SRC_ALPHA(default, never) = Context3DBlendFactor.ONE_MINUS_SOURCE_ALPHA;
+	public static var SRC_ALPHA(default, never) = Context3DBlendFactor.SOURCE_ALPHA;
 	
-	public static inline function bindTexture(texture:GTexture):Void
+	public static inline function bindTexture(texture:ARTexture):Void
 	{
 		// TODO
 	}
@@ -24,7 +23,7 @@ class Renderer
 		ctx.clear(r, g, b, a);
 	}
 	
-	public static inline function createTexture(width:Int, height:Int, data:BitmapData):GTexture
+	public static inline function createTexture(width:Int, height:Int, data:BitmapData):ARTexture
 	{
 		var texture = ctx.createTexture(width, height, flash.display3D.Context3DTextureFormat.BGRA, false);
 		texture.uploadFromBitmapData(data);
@@ -69,8 +68,12 @@ class Renderer
 		reconfigureBackBuffer();
 	}
 	
+	@:allow(haxepunk.Engine)
 	private static var ctx:Context3D;
+	
+	@:allow(haxepunk.Engine)
 	private static var stage3D:Stage3D;
+	
 	private static var width:Int = 0;
 	private static var height:Int = 0;
 	private static var antialiasing:Int = 0;
@@ -78,6 +81,6 @@ class Renderer
 	
 }
 
-typedef Buffer = Dynamic; // temp
+typedef ARBuffer = Dynamic; // temp
 
-typedef GTexture = flash.display3D.textures.Texture;
+typedef ARTexture = flash.display3D.textures.Texture;
